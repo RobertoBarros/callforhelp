@@ -10,14 +10,14 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user.role_teacher?
   end
 
   def update?
-    user.admin? && record.user == user
+    record.user == user
   end
 
   def destroy?
-    user.admin? && record.user == user
+    record.user == user
   end
 end
