@@ -2,7 +2,6 @@ class RoomsController < ApplicationController
   before_action :set_room, only: %i[show]
 
   def index
-    authorize Room
     @rooms = policy_scope(Room).order(created_at: :desc)
   end
 
