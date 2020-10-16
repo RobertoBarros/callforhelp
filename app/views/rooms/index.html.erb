@@ -1,7 +1,9 @@
 <div class="container">
 
   <div class="row my-3 justify-content-end">
-      <%= link_to 'Add Room', new_room_path, class: 'btn btn-success' %>
+      <% if policy(Room).create? %>
+        <%= link_to 'Add Room', new_room_path, class: 'btn btn-success' %>
+      <% end %>
   </div>
 
 

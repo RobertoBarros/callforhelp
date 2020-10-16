@@ -12,7 +12,15 @@
           <p class="card-text"><%= ticket.description %></p>
 
         </div>
-        <div class="col-2">
+        <div class="col-2 text-center">
+          <% if ticket.teacher.present? %>
+            <p><%= ticket.teacher.name %></p>
+            <p><%= image_tag ticket.teacher.avatar_url, class: 'avatar' %></p>
+          <% else %>
+            <p>No teacher yet</p>
+          <% end %>
+
+
           <% if policy(ticket).destroy? %>
             <%= link_to 'Cancel', ticket_path(ticket), method: :delete, class: 'btn btn-danger'%>
           <% end %>
