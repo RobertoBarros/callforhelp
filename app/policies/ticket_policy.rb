@@ -9,9 +9,8 @@ class TicketPolicy < ApplicationPolicy
     # only one ticket per student per room
     open_tickets = Ticket.where(student: user)
                          .where(solved: false)
-                         .group(:room_id)
-                         .having('COUNT(*) > 0')
-                         .count.count
+                         .where(room: record.room)
+                         .count
 
     user.role_student? && open_tickets.zero?
   end
@@ -24,9 +23,8 @@ class TicketPolicy < ApplicationPolicy
     # only one ticket per teachers per room
     assing_tickets = Ticket.where(teacher: user)
                            .where(solved: false)
-                           .group(:room_id)
-                           .having('COUNT(*) > 0')
-                           .count.count
+                           .where(room: record.room)
+                           .count
 
     user.role_teacher? && assing_tickets.zero? && record.teacher.nil?
   end
