@@ -8,5 +8,11 @@ Rails.application.routes.draw do
     resources :tickets, only: %i[new create]
   end
 
+  resources :tickets, only: %i[destroy] do
+    post 'assign_teacher', to: 'tickets#assign_teacher', on: :member
+    post 'cancel', to: 'tickets#cancel', on: :member
+    post 'solved', to: 'tickets#solved', on: :member
+  end
+
   root to: 'pages#home'
 end

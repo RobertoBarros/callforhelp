@@ -1,0 +1,31 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="row">
+        <div class="col-1 d-flex justify-content-center align-items-center">
+          <h1><%= index + 1 %></h1>
+        </div>
+        <div class="col-1 d-flex justify-content-center align-items-center">
+          <%= image_tag ticket.student.avatar_url, class: 'avatar-large' %>
+        </div>
+        <div class="col-8">
+          <h5 class="card-title"><%= ticket.student.name %></h5>
+          <p class="card-text"><%= ticket.description %></p>
+
+        </div>
+        <div class="col-2">
+          <% if policy(ticket).destroy? %>
+            <%= link_to 'Cancel', ticket_path(ticket), method: :delete, class: 'btn btn-danger'%>
+          <% end %>
+          <% if policy(ticket).solved? %>
+            <%= link_to 'Solved', solved_ticket_path(ticket), class: 'btn btn-success', method: :post %>
+          <% end %>
+          <% if policy(ticket).cancel? %>
+            <%= link_to 'Cancel', cancel_ticket_path(ticket), class: 'btn btn-link', method: :post %>
+          <% end %>
+          <% if policy(ticket).assign_teacher? %>
+            <%= link_to 'Get Ticket', assign_teacher_ticket_path(ticket), class: 'btn btn-info', method: :post %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>

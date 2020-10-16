@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
   before_action :set_room, only: %i[new create]
+  before_action :set_ticket, only: %i[assign_teacher cancel solved destroy]
+
   def new
     @ticket = Ticket.new
     authorize @ticket
@@ -17,10 +19,38 @@ class TicketsController < ApplicationController
     end
   end
 
+  def destroy
+    @ticket.destroy
+    redirect_to room_path(@ticket.room)
+  end
+
+  def assign_teacher
+    @ticket.teacher = current_user
+    @ticket.save
+    redirect_to room_path(@ticket.room)
+  end
+
+  def solved
+    @ticket.solved = true
+    @ticket.save
+    redirect_to room_path(@ticket.room)
+  end
+
+  def cancel
+    @ticket.teacher = nil
+    @ticket.save
+    redirect_to room_path(@ticket.room)
+  end
+
   private
 
   def set_room
     @room = Room.find(params[:room_id])
+  end
+
+  def set_ticket
+    @ticket = Ticket.find(params[:id])
+    authorize @ticket
   end
 
   def ticket_params

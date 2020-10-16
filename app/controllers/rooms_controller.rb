@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @tickets = @room.tickets
+    @tickets = @room.tickets.where(solved: false).order(:created_at)
   end
 
   def new
