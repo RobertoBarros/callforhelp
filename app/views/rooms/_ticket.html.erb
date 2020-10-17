@@ -2,19 +2,22 @@
   <div class="card-body">
     <div class="row">
         <div class="col-1 d-flex justify-content-center align-items-center">
-          <h1><%= index + 1 %></h1>
-        </div>
-        <div class="col-1 d-flex justify-content-center align-items-center">
           <%= image_tag ticket.student.avatar_url, class: 'avatar-large' %>
         </div>
         <div class="col-8">
-          <h5 class="card-title"><%= ticket.student.name %></h5>
+          <h5 class="card-title">
+            <%= ticket.student.name %>
+            <span class="badge badge-secondary">Student</span>
+          </h5>
           <p class="card-text"><%= ticket.description %></p>
 
         </div>
-        <div class="col-2 text-center">
+        <div class="col-3 text-center">
           <% if ticket.teacher.present? %>
-            <p><%= ticket.teacher.name %></p>
+            <p>
+              <%= ticket.teacher.name %>
+              <span class="badge badge-secondary">Teacher</span>
+            </p>
             <p><%= image_tag ticket.teacher.avatar_url, class: 'avatar' %></p>
           <% else %>
             <p>No teacher yet</p>
