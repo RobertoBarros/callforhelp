@@ -1,5 +1,7 @@
 <div class="container">
 
+  <h1 class="mb-4 mt-2">Open Rooms</h1>
+
   <div class="row my-3 justify-content-end">
       <% if policy(Room).create? %>
         <%= link_to 'Create new Room', new_room_path, class: 'btn btn-success' %>
@@ -7,24 +9,16 @@
   </div>
 
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Room Name</th>
-        <th scope="col">Tickets</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @rooms.each do |room| %>
-        <tr>
-          <td><%= link_to room.name, room_path(room) %></td>
-          <td></td>
-          <td></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+  <% @rooms.each do |room| %>
+    <div class="card mb-3">
+      <div class="card-body border-left border-success">
+        <h5 class="mb-0"><%= link_to room.name, room_path(room), class: 'text-decoration-none' %></h5>
+      </div>
+    </div>
+  <% end %>
+
+
 
 
 </div>
