@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :profiles, only: %i[new create]
   resources :rooms, only: %i[index show new create] do
     resources :tickets, only: %i[new create]
-    get :tickets, on: :member, defaults: { format: :js }
   end
 
   resources :tickets, only: %i[destroy] do

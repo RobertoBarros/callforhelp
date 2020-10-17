@@ -9,7 +9,12 @@ const initRoomCable = () => {
       received(data) {
         // console.log(data); // called when data is broadcast in the cable
 
-        fetch("http://localhost:3000/rooms/3/tickets")
+        fetch(window.location.href,  {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
         .then(response => response.json())
         .then((data) => {
           // console.log(data);
