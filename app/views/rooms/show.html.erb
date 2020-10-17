@@ -10,9 +10,11 @@
       <% end %>
   </div>
 
-  <% @tickets.each do |ticket| %>
-    <%= render partial: 'ticket', locals: { ticket: ticket } %>
-  <% end %>
+  <div id="tickets" data-room-id="<%= @room.id %>">
+    <% @tickets.each do |ticket| %>
+      <%= render partial: 'ticket', locals: { ticket: ticket } %>
+    <% end %>
+  </div>
 
 
 </div>

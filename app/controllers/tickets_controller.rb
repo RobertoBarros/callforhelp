@@ -27,6 +27,12 @@ class TicketsController < ApplicationController
   def assign_teacher
     @ticket.teacher = current_user
     @ticket.save
+
+    RoomChannel.broadcast_to(
+      @ticket.room,
+      render_to_string(partial: "rooms/ticket", locals: { ticket: @ticket })
+    )
+
     redirect_to room_path(@ticket.room)
   end
 
