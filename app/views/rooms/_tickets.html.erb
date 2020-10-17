@@ -1,3 +1,9 @@
+<div class="row my-3 justify-content-end">
+      <% if policy(room.tickets.new).create? %>
+        <%= link_to 'New Ticket', new_room_ticket_path(@room), class: 'btn btn-primary' %>
+      <% end %>
+  </div>
+
 <% tickets.each do |ticket| %>
   <%= render partial: 'ticket_item', locals: { ticket: ticket } %>
 <% end %>

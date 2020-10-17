@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
       format.html
       format.json do
         response = { tickets_html: render_to_string(partial: 'rooms/tickets',
-                                                    locals: { tickets: @tickets },
+                                                    locals: { room: @room, tickets: @tickets },
                                                     formats: :html) }
 
         render json: response.to_json

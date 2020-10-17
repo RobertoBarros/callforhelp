@@ -4,13 +4,8 @@
     <%= @room.name %>
   </h1>
 
-  <div class="row my-3 justify-content-end">
-      <% if policy(@room.tickets.new).create? %>
-        <%= link_to 'New Ticket', new_room_ticket_path(@room), class: 'btn btn-primary' %>
-      <% end %>
-  </div>
   <div id="tickets" data-room-id="<%= @room.id %>">
-    <%= render partial: 'tickets', locals: {tickets: @tickets} %>
+    <%= render partial: 'tickets', locals: {room: @room, tickets: @tickets} %>
   </div>
 
 </div>
