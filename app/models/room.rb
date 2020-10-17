@@ -3,5 +3,4 @@ class Room < ApplicationRecord
   has_many :tickets
 
   validates :name, presence: true, uniqueness: true
-  validates :user, presence: true
 end

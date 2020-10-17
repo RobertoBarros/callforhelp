@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
 
   resources :profiles, only: %i[new create]
-  resources :rooms, only: %i[index show new create] do
+  resources :rooms, only: %i[index show new create edit update] do
     resources :tickets, only: %i[new create]
   end
 
