@@ -27,9 +27,6 @@ class TicketsController < ApplicationController
   def assign_teacher
     @ticket.teacher = current_user
     @ticket.save
-
-    RoomChannel.broadcast_to(@ticket.room, nil)
-
     redirect_to room_path(@ticket.room)
   end
 
