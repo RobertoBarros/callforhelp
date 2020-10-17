@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show]
+  before_action :set_room, only: %i[show tickets]
 
   def index
     @rooms = policy_scope(Room).order(created_at: :desc)
@@ -24,6 +24,14 @@ class RoomsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def tickets
+    @tickets = @room.tickets.where(solved: false).order(:created_at)
+
+    response = { tickets_html: render_to_string(partial: "rooms/tickets", locals: { tickets: @tickets }) }
+
+    render json: response.to_json
   end
 
   private

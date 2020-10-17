@@ -20,4 +20,8 @@ class RoomPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
+
+  def tickets?
+    true
+  end
 end

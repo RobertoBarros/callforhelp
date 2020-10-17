@@ -9,12 +9,8 @@
         <%= link_to 'New Ticket', new_room_ticket_path(@room), class: 'btn btn-primary' %>
       <% end %>
   </div>
-
   <div id="tickets" data-room-id="<%= @room.id %>">
-    <% @tickets.each do |ticket| %>
-      <%= render partial: 'ticket', locals: { ticket: ticket } %>
-    <% end %>
+    <%= render partial: 'tickets', locals: {tickets: @tickets} %>
   </div>
-
 
 </div>
