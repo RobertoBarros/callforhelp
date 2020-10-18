@@ -1,0 +1,10 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path('banner.jpg') %>);">
+  <div class="container">
+    <h1>Call for Help</h1>
+    <p>A simple ticket system</p>
+    <%= link_to user_github_omniauth_authorize_path, class: 'btn btn-lg btn-dark align-items-center' do %>
+      <i class="fab fa-github"></i>
+      Login with Github
+    <% end %>
+  </div>
+</div>
