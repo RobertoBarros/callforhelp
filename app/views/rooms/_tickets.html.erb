@@ -3,7 +3,7 @@
     <div class="card-body text-center">
       <h6>Teachers</h6>
       <% room.teachers.each do |teacher| %>
-        <%= image_tag teacher.user.avatar_url, class: 'avatar' %>
+        <%= image_tag teacher.user.avatar_url, class: 'avatar', title: teacher.user.name, data: { toggle: 'tooltip', placement: 'bottom' }  %>
       <% end %>
     </div>
   </div>

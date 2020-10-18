@@ -10,4 +10,9 @@ import { initSelect2 } from '../components/init_select2.js';
 document.addEventListener('turbolinks:load', () => {
   initRoomCable();
   initSelect2();
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
 });
