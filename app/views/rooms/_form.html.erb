@@ -1,4 +1,5 @@
 <%= simple_form_for room do |f| %>
   <%= f.input :name %>
+  <%= f.association :users, collection: User.order(:name).map{ |u| ["#{u.name} (#{u.nickname})", u.id] }, input_html: {class: 'select2'}, include_blank: false, include_hidden: false, label: 'Select Teachers for Room' %>
   <%= f.submit 'Save Room', class: 'btn btn-primary btn-block' %>
 <% end %>

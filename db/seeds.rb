@@ -1,7 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
+
+# Generate 50 fake users
+url = 'https://randomuser.me/api/?nat=br&results=50&inc=email,name,picture,login'
+users_data = JSON.load(open(url))
+
+users_data['results'].each do |user_data|
+  user_info = {
+    name: "#{user_data['name']['first']} #{user_data['name']['last']}",
+    email: user_data['email'],
+    nickname: user_data['login']['username'],
+    avatar_url: user_data['picture']['medium'],
+    password: Devise.friendly_token[0, 20]
+  }
+  User.create!(user_info)
+end
+
+

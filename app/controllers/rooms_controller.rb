@@ -31,7 +31,8 @@ class RoomsController < ApplicationController
 
     @room.user = current_user
     if @room.save
-      redirect_to rooms_path
+      update_teachers
+      redirect_to room_path(@room)
     else
       render :new
     end
@@ -42,13 +43,21 @@ class RoomsController < ApplicationController
 
   def update
     if @room.update(room_params)
-      redirect_to rooms_path
+      update_teachers
+      redirect_to room_path(@room)
     else
       render :edit
     end
   end
 
   private
+
+  def update_teachers
+    @room.teachers.destroy_all
+    params[:room][:user_ids]&.each do |user_id|
+      Teacher.create(room: @room, user_id: user_id)
+    end
+  end
 
   def set_room
     @room = Room.find(params[:id])

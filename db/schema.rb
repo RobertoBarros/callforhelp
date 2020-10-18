@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_194400) do
+ActiveRecord::Schema.define(version: 2020_10_18_153008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2020_10_16_194400) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_rooms_on_user_id"
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_teachers_on_room_id"
+    t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -49,11 +58,14 @@ ActiveRecord::Schema.define(version: 2020_10_16_194400) do
     t.string "name"
     t.string "avatar_url"
     t.integer "role"
+    t.string "nickname"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "rooms", "users"
+  add_foreign_key "teachers", "rooms"
+  add_foreign_key "teachers", "users"
   add_foreign_key "tickets", "rooms"
   add_foreign_key "tickets", "users", column: "student_id"
   add_foreign_key "tickets", "users", column: "teacher_id"

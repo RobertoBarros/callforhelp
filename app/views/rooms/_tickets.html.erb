@@ -1,3 +1,14 @@
+<% if room.teachers.count.positive? %>
+  <div class="card mt-3">
+    <div class="card-body text-center">
+      <h6>Teachers</h6>
+      <% room.teachers.each do |teacher| %>
+        <%= image_tag teacher.user.avatar_url, class: 'avatar' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <% if tickets.count.positive? %>
   <div class="row my-3 justify-content-end">
     <% if policy(room.tickets.new).create? %>
