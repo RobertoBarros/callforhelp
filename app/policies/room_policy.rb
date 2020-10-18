@@ -10,7 +10,8 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def create?
-    user.role_teacher?
+    # only one room by user
+    user.rooms.count <= 1
   end
 
   def update?

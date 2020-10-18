@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-4">
-      <h1>New User</h1>
+      <h1>User Profile</h1>
       <%= simple_form_for @profile, url: profiles_path, method: :post do |f| %>
         <%= f.input :name %>
-        <%= f.input :role, collection: [['Student', 'role_student'], ['Teacher', 'role_teacher']] %>
         <%= f.submit 'Create User', class: 'btn btn-primary btn-block' %>
       <% end %>
     </div>

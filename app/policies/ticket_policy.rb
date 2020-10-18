@@ -6,13 +6,13 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def create?
-    # only one ticket per student per room
+    # only one ticket per room
     open_tickets = Ticket.where(student: user)
                          .where(solved: false)
                          .where(room: record.room)
                          .count
 
-    user.role_student? && open_tickets.zero?
+    open_tickets.zero?
   end
 
   def destroy?
@@ -20,13 +20,18 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def assign_teacher?
+    # user is teacher in the room
+    user_is_teacher_in_room = record.room.teachers.map(&:user).pluck(:id).include?(user.id)
+
     # only one ticket per teachers per room
     assing_tickets = Ticket.where(teacher: user)
                            .where(solved: false)
                            .where(room: record.room)
                            .count
 
-    user.role_teacher? && assing_tickets.zero? && record.teacher.nil?
+    user_is_teacher_in_room &&
+    assing_tickets.zero? &&
+    record.teacher.nil?
   end
 
   def cancel?
